@@ -1,4 +1,3 @@
-from unittest.mock import patch, MagicMock
 import pytest
 from main import Officine
 
@@ -136,9 +135,11 @@ def test_quantite_invalid_argument_int(mock_ingredients, mock_recettes):
 def test_preparer_normal(mock_ingredients, mock_recettes):
     #Arrange
     officine = Officine(mock_ingredients, mock_recettes)
+    officine.rentrer("3 radicelles de racine hurlante")
+    officine.rentrer("1 fiole de glaires purulentes")
 
     #Act
-    result = officine.preparer("1 bille d'âme évanescente")
+    result = officine.preparer("1 baton de pâte sépulcrale")
 
     #Assert
     assert result == 1
