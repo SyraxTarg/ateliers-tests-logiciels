@@ -118,7 +118,7 @@ def test_quantite_invalid_argument_bool(mock_ingredients, mock_recettes):
         officine.quantite(True)
 
     #Assert
-    assert str(result.value) == "'bool' object has no attribute 'strip'"
+    assert str(result.value) == "Le nom doit être un string"
 
 
 def test_quantite_invalid_argument_int(mock_ingredients, mock_recettes):
@@ -130,4 +130,15 @@ def test_quantite_invalid_argument_int(mock_ingredients, mock_recettes):
         officine.quantite(56)
 
     #Assert
-    assert str(result.value) == "'int' object has no attribute 'strip'"
+    assert str(result.value) == "Le nom doit être un string"
+
+
+def test_preparer_normal(mock_ingredients, mock_recettes):
+    #Arrange
+    officine = Officine(mock_ingredients, mock_recettes)
+
+    #Act
+    result = officine.preparer("1 bille d'âme évanescente")
+
+    #Assert
+    assert result == 1

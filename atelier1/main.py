@@ -37,8 +37,12 @@ class Officine:
         return alias
 
     def _normaliser_nom(self, nom):
-        nom = nom.strip().lower()
-        return self.alias.get(nom, nom)
+        try:
+            nom = nom.strip().lower()
+            return self.alias.get(nom, nom)
+        except AttributeError:
+            raise AttributeError("Le nom doit être un string")
+
 
     def rentrer(self, texte):
         match = re.match(r"(\d+)\s+(.+)", texte.strip())
@@ -94,30 +98,3 @@ class Officine:
         self.stocks[nom_potion] += max_possible
         return max_possible
 
-
-# ingredients = [
-#     "œil/yeux de grenouille",
-#     "larme de brume funèbre",
-#     "radicelle de racine hurlante",
-#     "pincée de poudre de lune",
-#     "croc de troll",
-#     "fragment d'écaille de dragonnet",
-#     "goutte de sang de citrouille"
-# ]
-# recettes = {
-#     "fiole de glaires purulentes"   : [ "2 larmes de brume funèbre",  "1 goutte de sang de citrouille" ],
-#     "bille d'âme évanescente"       : [ "3 pincées de poudre de lune", "1 œil de grenouille" ],
-#     "soupçon de sels suffocants"    : [ "2 crocs de troll", "1 fragment d'écaille de dragonnet", "1 radicelle de racine hurlante" ],
-#     "baton de pâte sépulcrale"      : [ "3 radicelles de racine hurlante", "1 fiole de glaires purulentes" ],
-#     "bouffée d'essence de cauchemar": [ "2 pincées de poudre de lune", "2 larmes de brume funèbre" ]
-# }
-
-# o = Officine(ingredients, recettes)
-
-# o.rentrer("3 yeux de grenouille")
-# o.rentrer("4 larmes de brume funèbre")
-# o.rentrer("2 gouttes de sang de citrouille")
-
-# print(o.quantite("œil de grenouille"))  # 3
-# print(o.preparer("2 fioles de glaires purulentes"))  # 2 préparées
-# print(o.quantite("fiole de glaires purulentes"))  # 2
